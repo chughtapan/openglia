@@ -5,6 +5,7 @@ import shutil
 from pathlib import Path
 
 from fast_agent import FastAgent, RequestParams
+from fast_agent.mcp.prompt_serialization import save_messages
 
 PROMPTS_DIR = Path(__file__).parent.parent / "prompts"
 RESEARCHER_PROMPT = (PROMPTS_DIR / "researcher.md").read_text()
@@ -20,7 +21,7 @@ async def create_openglia_agents() -> FastAgent:
     @fast.agent(
         name="researcher",
         instruction=RESEARCHER_PROMPT,
-        request_params=RequestParams(maxTokens=128000, max_iterations=1000, use_history=True, temperature=1.0),
+        request_params=RequestParams(maxTokens=64000, max_iterations=1000, use_history=True, temperature=1.0),
     )
     async def researcher() -> None:
         pass
@@ -28,7 +29,7 @@ async def create_openglia_agents() -> FastAgent:
     @fast.agent(
         name="supervisor",
         instruction=SUPERVISOR_PROMPT,
-        request_params=RequestParams(maxTokens=128000, max_iterations=100, use_history=True, temperature=1.0),
+        request_params=RequestParams(maxTokens=64000, max_iterations=100, use_history=True, temperature=1.0),
     )
     async def supervisor() -> None:
         pass
@@ -56,7 +57,11 @@ async def run_discovery(problem_file: Path, output_dir: Path) -> str:
     # Save outputs
     (output_dir / "solution.md").write_text(result)
 
-    # Copy trace if exists
+    # Save agent transcripts
+    save_messages(agent.researcher.llm.message_history, str(output_dir / "researcher_transcript.jsonl"))
+    save_messages(agent.supervisor.llm.message_history, str(output_dir / "supervisor_transcript.jsonl"))
+
+    # Copy default trace if exists
     trace = Path("fastagent.jsonl")
     if trace.exists():
         shutil.copy(trace, output_dir / "fastagent.jsonl")

@@ -1,0 +1,11 @@
+# Generated outputs from runs
+generated/
+
+# Cloned simulator (installed by setup.sh)
+environment/vidur/
+
+# Cache directories
+environment/cache/
+
+# Run-specific files
+fastagent.jsonl

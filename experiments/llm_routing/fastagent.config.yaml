@@ -1,0 +1,13 @@
+# LLM Routing Experiment Configuration
+default_model: anthropic.claude-sonnet-4-5
+
+# Vidur simulations need long timeouts
+shell_execution:
+  timeout_seconds: 1800  # 30 minutes
+  warning_interval_seconds: 60
+
+# Experiment parameters
+experiment:
+  target_qps: 2.0
+  baseline_time: 3.42
+  target_improvement: 20

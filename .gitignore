@@ -11,13 +11,11 @@ build/
 *.secrets.yaml
 
 # Generated outputs
-generated/
 fastagent.jsonl
 *.~undo-tree~
 
-# Environment (per-experiment)
-experiments/*/environment/vidur/
-experiments/*/environment/cache/
+# Experiment solutions (don't commit answers)
+experiments/llm_routing/environment/ai_global_scheduler.py
 
 # Editor
 .DS_Store

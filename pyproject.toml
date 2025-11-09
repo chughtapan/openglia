@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "openglia"
 version = "0.1.0"
 description = "Minimal prompts over fast-agent for AI-driven systems research"
-requires-python = ">=3.10"
+requires-python = ">=3.13.5"
 dependencies = [
     "fast-agent-mcp>=0.3.0",
     "anthropic>=0.18.0",
@@ -28,7 +28,8 @@ openglia = ["prompts/*.md"]
 
 [tool.ruff]
 line-length = 120
-target-version = "py310"
+target-version = "py313"
+exclude = ["experiments/llm_routing/environment/ai_global_scheduler.py"]
 
 [tool.ruff.lint]
 select = ["C4", "C90", "E", "F", "I", "PERF", "PL", "UP"]
