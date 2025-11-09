@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "openglia"
+version = "0.1.0"
+description = "Minimal prompts over fast-agent for AI-driven systems research"
+requires-python = ">=3.10"
+dependencies = [
+    "fast-agent-mcp>=0.3.0",
+    "anthropic>=0.18.0",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.1.0",
+    "mypy>=1.5.0",
+    "pre-commit>=3.0.0",
+]
+
+[tool.setuptools]
+packages = ["openglia", "openglia.workflows"]
+
+[tool.setuptools.package-data]
+openglia = ["prompts/*.md"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["C4", "C90", "E", "F", "I", "PERF", "PL", "UP"]
+ignore = ["PERF203", "PLC0415", "PLR0402", "PLR2004"]
+
+[tool.mypy]
+strict = true

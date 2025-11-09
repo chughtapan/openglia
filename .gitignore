@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+dist/
+build/
+
+# Secrets
+.env
+*.secrets.yaml
+
+# Generated outputs
+generated/
+fastagent.jsonl
+*.~undo-tree~
+
+# Environment (per-experiment)
+experiments/*/environment/vidur/
+experiments/*/environment/cache/
+
+# Editor
+.DS_Store
+.vscode/
